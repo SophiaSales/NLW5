@@ -1,21 +1,20 @@
-import { query } from "express";
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateMessages1619043041283 implements MigrationInterface {
+export class CreateMessages1619211038557 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name:"messages",
+                name: "messages",
                 columns: [
                     {
-                        name:"id",
+                        name: "id",
                         type: "uuid",
-                        isPrimary: true
+                        isPrimary: true,
                     },
                     {
                         name: "admin_id",
-                        type: "uuid",
+                        type: "uudi",
                         isNullable: true,
                     },
                     {
@@ -24,19 +23,19 @@ export class CreateMessages1619043041283 implements MigrationInterface {
                     },
                     {
                         name: "text",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
-                        name:"created_at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                 ],
-                foreignKeys:[
+                foreignKeys: [
                     {
                         name: "FKUser",
                         referencedTableName: "users",
-                        referencedColumnNames : ["id"],
+                        referencedColumnNames: ["id"],
                         columnNames: ["user_id"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
@@ -49,5 +48,4 @@ export class CreateMessages1619043041283 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable("messages");
     }
-
 }
