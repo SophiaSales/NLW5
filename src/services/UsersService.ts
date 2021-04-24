@@ -20,11 +20,16 @@ class UsersService{
             return userExists;
         }
         const user = this.usersRepository.create({
-            email
+            email,
         });
 
         //Se nao existir,salva no bd 
         await this.usersRepository.save(user);
+        return user;
+    }
+    async findByEmail(email: string) {
+        const user = await this.usersRepository.findOne({ email });
+
         return user;
     }
 }
